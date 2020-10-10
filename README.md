@@ -1,7 +1,10 @@
-# drcom_guet
-drcom python auto login script for guet
-# GayUET哆点自动登录
-### guet使用哆点d版但是drcom无法发挥作用，于是对drcom作简单适配
+# G(ay)UET哆点校园网自动登录
+
+#### 我对于桂电晚上不断网对于校园网流量不限制的做法十分满意并十分感谢！！！
+## 关于
+#### guet使用哆点d版但是drcom无法发挥作用，于是对drcom作简单适配
+#### 通过抓包发现桂电的哆点登录方式奇特，可简化为后面的bash脚本
+
 # python版（适用于电脑）
 ### windows和linux都可正常使用（目前在Windows上测试正常）
 ## 如何使用
@@ -20,6 +23,9 @@ type = 3
 number=19003xxxxx
 pwd=123456
 ```
-
 #### 然后给权限，将drcom_guet.sh添加到/etc/rc.local的exit前
 `chmod /usr/bin/drcom_guet.sh`
+
+#### pdcn（老毛子）可以在自定义脚本里面讲bash文件内容复制到“在wan启动之后运行”的脚本里面以实现自动登录
+
+# 转载请注明
