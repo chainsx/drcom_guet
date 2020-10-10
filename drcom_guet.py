@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 #-*- coding: utf-8 -*-
+# @Author  : chainsx
+# @FileName: drcom_guet.py
 
 import time
 import socket
