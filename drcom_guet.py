@@ -11,13 +11,13 @@ import requests
 login_type=['', '@cmcc', '@unicom', '@telecom']
 
 def get_host_ip():
-    try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(('guet.edu.cn', 80))
-        ip = s.getsockname()[0]
-    finally:
-        s.close()
-    return ip
+	try:
+		s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        	s.connect(('guet.edu.cn', 80))
+        	ip = s.getsockname()[0]
+	finally:
+		s.close()
+	return ip
 myaddr = get_host_ip()
 
 def login(user, pwd, type):
@@ -40,9 +40,10 @@ def login(user, pwd, type):
 	res = requests.get(url, params=data).text
 	res = res.split('(')[1].split(')')[0]
 	res = json.loads(res)
+
+	print(res['msg'])
 	if res['msg'] == '':
-		print('UNKNOWN ERROR')
-	print(res)
+		print('未知错误或您已登录')
 
 
 user = "19003xxxxx"
