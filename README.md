@@ -29,5 +29,6 @@ pwd=123456
 `chmod /usr/bin/drcom_guet.sh`
 
 #### pdcn（老毛子）可以在自定义脚本里面讲bash文件内容复制到“在wan启动之后运行”的脚本里面以实现自动登录
+#### openwrt可以使用`crontab -e` 添加 `* * * * * /usr/bin/login.sh` 每分钟检测一次
 
 # 转载请注明

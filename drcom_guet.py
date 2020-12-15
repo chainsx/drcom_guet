@@ -4,53 +4,57 @@
 # @FileName: drcom_guet.py
 
 import time
-import socket
 import json
 import requests
+from time import sleep
+from subprocess import run, PIPE
 
-login_type=['', '@cmcc', '@unicom', '@telecom']
-
-def get_host_ip():
-	try:
-		s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        	s.connect(('guet.edu.cn', 80))
-        	ip = s.getsockname()[0]
-	finally:
-		s.close()
-	return ip
-myaddr = get_host_ip()
-
-def login(user, pwd, type):
-	url = "http://10.32.254.11:801/eportal/"
-	data = {
-		'c': 'Portal',
-		'a': 'login',
-		'callback': 'dr' + str(int(time.time() * 1000)),
-		'login_method': '1',
-		'user_account': user + login_type[type],
-		'user_password': pwd,
-		'wlan_user_ip': myaddr,
-		'wlan_user_ipv6': '',
-		'wlan_user_mac': '000000000000',
-		'wlan_ac_ip': '',
-		'wlan_ac_name': '',
-		'jsVersion': '3.3',
-		'_': str(int(time.time() * 1000)),
-		}
-	res = requests.get(url, params=data).text
-	res = res.split('(')[1].split(')')[0]
-	res = json.loads(res)
-
-	print(res['msg'])
-	if res['msg'] == '':
-		print('未知错误或您已登录')
-
-
-user = "19003xxxxx"
+user = "190030xxxx"
 #学号
-pwd = "xxxxxxx"
+pwd = "xxxxxxxx"
 #密码
 type = 3
 # 0,1,2,3分别对应校园网、移动、联通与电信。
 
-login(user, pwd, type)
+login_type=['', '@cmcc', '@unicom', '@telecom']
+
+def login(user, pwd, type):
+    url = "http://10.0.1.5/drcom/login"
+    data = {
+        'callback': 'dr' + str(int(time.time() * 1000)),
+        'DDDDD': user + login_type[type],
+        'upass': pwd,
+        '0MKKey': '123456',
+        'R1': '0',
+        'R2': None,
+        'R3': '0',
+        'R6': '0',
+        'para': '00',
+        'v6ip': None,
+        'terminal_type': '1',
+        'lang': 'zh-cn',
+        'jsVersion': '4.1',
+        'v': '6471',
+        }
+    res = requests.get(url, params=data).text
+    res = res.split('(')[1].split(')')[0]
+    res = json.loads(res)
+
+    if res['result'] == 1:
+        print(res['uid'] + " login success")
+        print("your ip address is " + res['v46ip'])
+
+cnt = 1
+while True:
+    r = run('ping www.guet.edu.cn',
+            stdout=PIPE,
+            stderr=PIPE,
+            stdin=PIPE,
+            shell=True)
+    if r.returncode:
+        print('relogin 第{}次'.format(cnt))
+        login(user, pwd, type)
+        cnt += 1
+    else:
+        print('正常联网')
+    sleep(60*30)
