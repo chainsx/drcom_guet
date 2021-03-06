@@ -21,7 +21,7 @@ def get_host_ip():
 myaddr = get_host_ip()
 
 def login(user, pwd, type):
-	url = "http://10.32.254.11:801/eportal/"
+	url = "http://10.0.1.5:801/eportal/"
 	data = {
 		'c': 'Portal',
 		'a': 'login',
