@@ -1,0 +1,14 @@
+[Unit]
+Description=net autologin service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 -u /opt/net_login/drcom_guet.py
+WorkingDirectory=/opt/net_login
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
