@@ -2,7 +2,7 @@
 time=$(date +%s%3N)
 number=19003xxxxx
 pwd=xxxxxx
-HOST=10.70.121.254
+HOST=8.8.8.8
 #touch /tmp/networkstatus.log
 ping -c 4 "$HOST" > /dev/null
 if [ $? -eq 0 ];then
