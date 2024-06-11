@@ -43,7 +43,7 @@ def login(user, pwd, type):
     res = json.loads(res)
 
     if res['result'] == 1:
-        print(res['uid'] + " 登陆成功")
+        print(res['uid'] + " 登录成功")
         print("系统分配的IP地址是" + res['v46ip'])
 
 cnt = 1
